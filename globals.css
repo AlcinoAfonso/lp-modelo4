@@ -1,3 +1,14 @@
+:root {
+  --largura-pagina: clamp(20rem, 100vw, 75rem);
+  --fonte-principal: 'Inter', sans-serif;
+  --tamanho-base: 1rem;
+  --padding-lateral-mobile: 1rem;
+  --padding-lateral-md: 1.5rem;
+}
+
+html { scroll-behavior: smooth; }
+
+/* diretivas Tailwind existentes */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
