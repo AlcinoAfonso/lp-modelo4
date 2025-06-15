@@ -1,14 +1,15 @@
 // app/page.tsx
-import lpData from '../lp.json';
-import Header from '../components/Header';
+import Header from "../components/Header"
+import lpData from "../lp.json"
 
 export default function Page() {
   return (
-    <main className="p-8">
-      {/* Header montado a partir do JSON */}
-      <Header layout={lpData.header.layout} data={lpData.header.data} />
-
-      {/* outras seções virão aqui */}
+    <main>
+      <Header
+        layout={lpData.header.layout}
+        data={lpData.header.data}
+      />
+      {/* …aqui virão as outras seções (Hero, Services etc.) */}
     </main>
-  );
+  )
 }
