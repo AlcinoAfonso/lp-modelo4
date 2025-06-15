@@ -1,17 +1,23 @@
 {
-  "order": ["Header"],
-  "Header": {
-    "backgroundColor": "#7A8AD6",
-    "textColor": "#333333",
-    "logoUrl": "https://quantecportal.com/wp-content/uploads/2025/04/logo-angelo-1-1.svg",
-    "menu": [
-      { "name": "etapas", "link": "#etapas" },
-      { "name": "quem somos", "link": "#quem_somos" }
-    ],
-    "phone": {
-      "display": "(21) 97965-8483",
-      "link": "21979658483"
+  "header": {
+    "layout": {
+      "gridClasses": {
+        "mobile": "grid-cols-1",
+        "md": "md:grid-cols-2"
+      }
+    },
+    "data": {
+      "backgroundColor": "#7A8AD6",
+      "textColor": "#333333",
+      "logoUrl": "https://quantecportal.com/wp-content/uploads/2025/04/logo-angelo-1-1.svg",
+      "menu": [
+        { "name": "etapas", "link": "#etapas" },
+        { "name": "quem somos", "link": "#quem_somos" }
+      ],
+      "phone": {
+        "display": "(21) 97965-8483",
+        "link": "21979658483"
+      }
     }
   }
 }
-
