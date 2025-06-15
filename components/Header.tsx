@@ -22,11 +22,15 @@ export default function Header({
   return (
     <header
       style={{ backgroundColor: data.backgroundColor, color: data.textColor }}
-      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} mb-8`}
+      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} items-center px-4 md:px-8 mb-8`}
     >
       {/* Coluna 1 – Logo */}
       <div>
-        <img src={data.logoUrl} alt="Logo" className="h-10 md:h-12 w-auto" />
+        <img
+          src={data.logoUrl}
+          alt="Logo"
+          className="h-12 w-auto max-w-[160px] object-contain"
+        />
       </div>
 
       {/* Coluna 2 – Menu / Telefone */}
