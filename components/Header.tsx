@@ -1,38 +1,37 @@
-import React from 'react';
+// components/Header.tsx
+import React from 'react'
 
-type MenuItem = { name: string; link: string };
-type Phone = { display: string; link: string };
+type MenuItem = { name: string; link: string }
+type Phone = { display: string; link: string }
 
 type LayoutHeader = {
-  gridClasses: { mobile: string; md: string };
-};
+  gridClasses: { mobile: string; md: string }
+}
 
 type DataHeader = {
-  backgroundColor: string;
-  textColor: string;
-  logoUrl: string;
-  menu: MenuItem[];
-  phone: Phone;
-};
+  backgroundColor: string
+  textColor: string
+  logoUrl: string
+  menu: MenuItem[]
+  phone: Phone
+}
 
 interface HeaderProps {
-  layout: LayoutHeader;
-  data: DataHeader;
+  layout: LayoutHeader
+  data: DataHeader
 }
 
 export default function Header({ layout, data }: HeaderProps) {
-  // Só pra checar, pode apagar depois:
-  // console.log("Header DATA:", data);
-
   return (
     <header
       style={{
         backgroundColor: data.backgroundColor,
         color: data.textColor,
       }}
-      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} items-center px-4 md:px-8 mb-8`}
+      /* grid-cols-1 no mobile, grid-cols-2 ≥ md  */
+      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} items-center gap-y-4 px-4 md:px-8 mb-8`}
     >
-      {/* Coluna 1 – logo */}
+      {/* Coluna 1 — logo */}
       <div className="flex items-center">
         <img
           src={data.logoUrl}
@@ -41,25 +40,38 @@ export default function Header({ layout, data }: HeaderProps) {
         />
       </div>
 
-      {/* Coluna 2 – menu + telefone (desktop) */}
-      <div className="hidden md:flex items-center justify-end space-x-6">
-        <nav className="flex space-x-4">
+      {/* Coluna 2 — menu + telefone */}
+      <div
+        /* justify-center mobile, justify-end md+ */
+        className="flex flex-col md:flex-row items-center justify-center md:justify-end space-y-4 md:space-y-0 md:space-x-6"
+      >
+        <nav className="flex space-x-4 text-sm font-medium">
           {data.menu.map((m) => (
-            <a key={m.link} href={m.link}>
+            <a
+              key={m.link}
+              href={m.link}
+              className="hover:underline underline-offset-4"
+            >
               {m.name}
             </a>
           ))}
         </nav>
-        <a href={`tel:${data.phone.link}`}>{data.phone.display}</a>
+
+        <a
+          className="font-semibold"
+          href={`tel:${data.phone.link}`}
+        >
+          {data.phone.display}
+        </a>
       </div>
 
-      {/* Ícone hambúrguer (só mobile) */}
+      {/* Hambúrguer (só mobile) — fica absolutamente à direita abaixo do logo */}
       <button
-        className="md:hidden justify-self-end text-2xl leading-none"
+        className="md:hidden justify-self-end text-2xl leading-none absolute right-4 top-4"
         aria-label="Menu"
       >
         ☰
       </button>
     </header>
-  );
+  )
 }
