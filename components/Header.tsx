@@ -5,7 +5,7 @@ type MenuItem = { name: string; link: string }
 type Phone = { display: string; link: string }
 
 type LayoutHeader = {
-  gridClasses: { mobile: string; md: string }
+  gridClasses: { mobile: string; md: string } // já vem do lp.json
 }
 
 type DataHeader = {
@@ -28,50 +28,64 @@ export default function Header({ layout, data }: HeaderProps) {
         backgroundColor: data.backgroundColor,
         color: data.textColor,
       }}
-      /* grid-cols-1 no mobile, grid-cols-2 ≥ md  */
-      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} items-center gap-y-4 px-4 md:px-8 mb-8`}
+      /* grid-cols-1 mobile  |  grid-cols-2 ≥ md */
+      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} items-center gap-y-4 py-3 px-4 md:px-8`}
     >
-      {/* Coluna 1 — logo */}
+      {/* Coluna 1 – logo */}
       <div className="flex items-center">
         <img
           src={data.logoUrl}
           alt="Logo"
-          className="h-12 w-auto max-w-[160px] object-contain"
+          className="h-12 w-auto max-w-[200px] object-contain"
         />
       </div>
 
-      {/* Coluna 2 — menu + telefone */}
-      <div
-        /* justify-center mobile, justify-end md+ */
-        className="flex flex-col md:flex-row items-center justify-center md:justify-end space-y-4 md:space-y-0 md:space-x-6"
-      >
-        <nav className="flex space-x-4 text-sm font-medium">
+      {/* Coluna 2 – menu + telefone (horizontal) */}
+      <div className="flex items-center justify-center md:justify-end space-x-8">
+        {/* Navegação */}
+        <nav className="hidden md:flex space-x-6 text-[1rem] font-semibold">
           {data.menu.map((m) => (
             <a
               key={m.link}
               href={m.link}
-              className="hover:underline underline-offset-4"
+              className="hover:underline underline-offset-4 capitalize"
             >
               {m.name}
             </a>
           ))}
         </nav>
 
+        {/* Telefone */}
         <a
-          className="font-semibold"
           href={`tel:${data.phone.link}`}
+          className="flex items-center space-x-2 font-semibold"
         >
-          {data.phone.display}
+          {/* ícone telefone (Heroicons outline) */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.25 6.75a3 3 0 013-3h.27a2 2 0 011.79 1.11l1.12 2.24a2 2 0 01-.45 2.39L6.6 10.6a15.036 15.036 0 006.79 6.79l1.87-1.87a2 2 0 012.39-.45l2.24 1.12a2 2 0 011.11 1.79v.27a3 3 0 01-3 3H17a18 18 0 01-15-15v-.27z"
+            />
+          </svg>
+          <span>{data.phone.display}</span>
         </a>
-      </div>
 
-      {/* Hambúrguer (só mobile) — fica absolutamente à direita abaixo do logo */}
-      <button
-        className="md:hidden justify-self-end text-2xl leading-none absolute right-4 top-4"
-        aria-label="Menu"
-      >
-        ☰
-      </button>
+        {/* Botão hambúrguer – só mobile */}
+        <button
+          className="md:hidden text-2xl leading-none"
+          aria-label="Abrir menu"
+        >
+          ☰
+        </button>
+      </div>
     </header>
   )
 }
