@@ -1,15 +1,11 @@
-// app/page.tsx
-import Header from '../components/Header'
-import sectionGlobals from '../config/section-globals.json'
-import lpData from '../lp.json'
+import lpData from '@/lp.json';
+import Header from '@/components/Header';
 
 export default function Page() {
   return (
     <main>
-      <Header
-        layout={sectionGlobals.Header.layout}
-        data={lpData.Header}
-      />
+      <Header layout={lpData.header.layout} data={lpData.header.data} />
+      {/* ... resto das seções */}
     </main>
-  )
+  );
 }
