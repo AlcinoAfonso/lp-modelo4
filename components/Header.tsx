@@ -1,11 +1,37 @@
 // components/Header.tsx
-export default function Header({ layout, data }) {
+import React from 'react';
+
+type MenuItem = { name: string; link: string };
+type Phone = { display: string; link: string };
+
+type LayoutHeader = {
+  gridClasses: { mobile: string; md: string };
+};
+
+type DataHeader = {
+  backgroundColor: string;
+  textColor: string;
+  logoUrl: string;
+  menu: MenuItem[];
+  phone: Phone;
+};
+
+interface HeaderProps {
+  layout: LayoutHeader;
+  data: DataHeader;
+}
+
+export default function Header({ layout, data }: HeaderProps) {
   return (
     <header
-      style={{ backgroundColor: data.backgroundColor, color: data.textColor }}
-      className="grid grid-cols-1 md:grid-cols-2 items-center px-4 md:px-8 mb-8"
+      style={{
+        backgroundColor: data.backgroundColor,
+        color: data.textColor,
+      }}
+      /* 1 coluna no mobile, 2 colunas ≥ md */
+      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} items-center px-4 md:px-8 mb-8`}
     >
-      {/* logo — sempre na esquerda/linha 1 */}
+      {/* Coluna 1 – logo */}
       <div className="flex items-center">
         <img
           src={data.logoUrl}
@@ -14,7 +40,7 @@ export default function Header({ layout, data }) {
         />
       </div>
 
-      {/* ações — menu + telefone; escondidos em mobile */}
+      {/* Coluna 2 – menu + telefone (desktop) */}
       <div className="hidden md:flex items-center justify-end space-x-6">
         <nav className="flex space-x-4">
           {data.menu.map((m) => (
@@ -26,8 +52,11 @@ export default function Header({ layout, data }) {
         <a href={`tel:${data.phone.link}`}>{data.phone.display}</a>
       </div>
 
-      {/* hambúrguer — só mobile */}
-      <button className="md:hidden justify-self-end text-2xl" aria-label="Menu">
+      {/* Ícone hambúrguer (só mobile) */}
+      <button
+        className="md:hidden justify-self-end text-2xl leading-none"
+        aria-label="Menu"
+      >
         ☰
       </button>
     </header>
