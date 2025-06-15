@@ -1,24 +1,24 @@
 // components/Header.tsx
-import React from 'react'
+import React from "react"
 
 type MenuItem = { name: string; link: string }
-type Phone = { display: string; link: string }
+type Phone    = { display: string; link: string }
 
 type LayoutHeader = {
-  gridClasses: { mobile: string; md: string } // já vem do lp.json
+  gridClasses: { mobile: string; md: string }
 }
 
 type DataHeader = {
   backgroundColor: string
-  textColor: string
-  logoUrl: string
-  menu: MenuItem[]
-  phone: Phone
+  textColor:       string
+  logoUrl:         string
+  menu:            MenuItem[]
+  phone:           Phone
 }
 
 interface HeaderProps {
   layout: LayoutHeader
-  data: DataHeader
+  data:   DataHeader
 }
 
 export default function Header({ layout, data }: HeaderProps) {
@@ -26,12 +26,12 @@ export default function Header({ layout, data }: HeaderProps) {
     <header
       style={{
         backgroundColor: data.backgroundColor,
-        color: data.textColor,
+        color:           data.textColor,
       }}
-      /* grid-cols-1 mobile  |  grid-cols-2 ≥ md */
-      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} items-center gap-y-4 py-3 px-4 md:px-8`}
+      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md}
+                  items-center gap-y-4 py-3 px-4 md:px-8`}
     >
-      {/* Coluna 1 – logo */}
+      {/* Coluna 1 – Logo */}
       <div className="flex items-center">
         <img
           src={data.logoUrl}
@@ -40,9 +40,9 @@ export default function Header({ layout, data }: HeaderProps) {
         />
       </div>
 
-      {/* Coluna 2 – menu + telefone (horizontal) */}
+      {/* Coluna 2 – Menu + Telefone */}
       <div className="flex items-center justify-center md:justify-end space-x-8">
-        {/* Navegação */}
+        {/* Navegação – só desktop */}
         <nav className="hidden md:flex space-x-6 text-[1rem] font-semibold">
           {data.menu.map((m) => (
             <a
@@ -60,7 +60,6 @@ export default function Header({ layout, data }: HeaderProps) {
           href={`tel:${data.phone.link}`}
           className="flex items-center space-x-2 font-semibold"
         >
-          {/* ícone telefone (Heroicons outline) */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 shrink-0"
@@ -78,7 +77,7 @@ export default function Header({ layout, data }: HeaderProps) {
           <span>{data.phone.display}</span>
         </a>
 
-        {/* Botão hambúrguer – só mobile */}
+        {/* Hambúrguer – só mobile */}
         <button
           className="md:hidden text-2xl leading-none"
           aria-label="Abrir menu"
