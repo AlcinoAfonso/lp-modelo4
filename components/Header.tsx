@@ -22,11 +22,11 @@ export default function Header({
   return (
     <header
       style={{ backgroundColor: data.backgroundColor, color: data.textColor }}
-      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md}`}
+      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} mb-8`}
     >
       {/* Coluna 1 – Logo */}
       <div>
-        <img src={data.logoUrl} alt="Logo" />
+        <img src={data.logoUrl} alt="Logo" className="h-10 md:h-12 w-auto" />
       </div>
 
       {/* Coluna 2 – Menu / Telefone */}
@@ -36,7 +36,7 @@ export default function Header({
           switch (item) {
             case 'nav':
               return (
-                <nav key="nav">
+                <nav key="nav" className="hidden md:flex space-x-4">
                   {data.menu.map((m) => (
                     <a key={m.link} href={m.link} className="mr-4">
                       {m.name}
@@ -46,7 +46,11 @@ export default function Header({
               );
             case 'phone':
               return (
-                <a key="phone" href={`tel:${data.phone.link}`}>
+                <a
+                  key="phone"
+                  href={`tel:${data.phone.link}`}
+                  className="hidden md:inline-block ml-4"
+                >
                   {data.phone.display}
                 </a>
               );
