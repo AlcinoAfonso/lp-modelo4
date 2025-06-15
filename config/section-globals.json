@@ -1,0 +1,13 @@
+{
+  "Header": {
+    "layout": {
+      "columns": { "mobile": 1, "md": 2 },
+      "gridClasses": { "mobile": "grid-cols-1", "md": "md:grid-cols-2" },
+      "col2": {
+        "classes": "flex items-center justify-center md:justify-end mb-8",
+        "contentOrder": ["nav", "phone", "hamburgerIcon"],
+        "hideOn": { "mobile": ["nav", "phone"], "md": [] }
+      }
+    }
+  }
+}
