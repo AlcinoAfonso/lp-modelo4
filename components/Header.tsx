@@ -1,24 +1,55 @@
-import layoutConfig from '../config/section-globals.json';
+type MenuItem = { name: string; link: string };
+type Phone = { display: string; link: string };
+type LayoutHeader = {
+  gridClasses: { mobile: string; md: string };
+  col2: { classes: string; contentOrder: string[]; hideOn: { mobile: string[]; md: string[] } };
+};
+type DataHeader = {
+  backgroundColor: string;
+  textColor: string;
+  logoUrl: string;
+  menu: MenuItem[];
+  phone: Phone;
+};
 
-const headerLayout = (layoutConfig as any).Header.layout;
-
-export default function Header() {
+export default function Header({
+  layout,
+  data,
+}: {
+  layout: LayoutHeader;
+  data: DataHeader;
+}) {
   return (
-    <header className={`grid ${headerLayout.gridClasses.mobile} ${headerLayout.gridClasses.md}`}>
+    <header
+      style={{ backgroundColor: data.backgroundColor, color: data.textColor }}
+      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md}`}
+    >
       {/* Coluna 1 – Logo */}
       <div>
-        <img src="/logo.png" alt="Logo" />
+        <img src={data.logoUrl} alt="Logo" />
       </div>
 
-      {/* Coluna 2 – Conteúdo dinâmico */}
-      <div className={headerLayout.col2.classes}>
-        {headerLayout.col2.contentOrder.map((item) => {
-          if (headerLayout.col2.hideOn.mobile.includes(item)) return null;
+      {/* Coluna 2 – Menu / Telefone */}
+      <div className={layout.col2.classes}>
+        {layout.col2.contentOrder.map((item) => {
+          if (layout.col2.hideOn.mobile.includes(item)) return null;
           switch (item) {
             case 'nav':
-              return <nav key="nav">/* links */</nav>;
+              return (
+                <nav key="nav">
+                  {data.menu.map((m) => (
+                    <a key={m.link} href={m.link} className="mr-4">
+                      {m.name}
+                    </a>
+                  ))}
+                </nav>
+              );
             case 'phone':
-              return <span key="phone">(11) 99999-0000</span>;
+              return (
+                <a key="phone" href={`tel:${data.phone.link}`}>
+                  {data.phone.display}
+                </a>
+              );
             case 'hamburgerIcon':
               return (
                 <button key="hamburger" className="md:hidden">

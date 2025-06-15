@@ -1,8 +1,22 @@
+import globals from '@/config/section-globals.json';
+import lp from '@/lp.json';
+
+import Header from '@/components/Header';
+
+const componentsMap: Record<string, any> = {
+  Header,
+  // Hero, Benefits etc. serão registrados aqui depois
+};
+
 export default function Page() {
   return (
-    <main className="p-8">
-      <h1>🚀 LP funcionando!</h1>
-      <p>Este é um teste simples antes de avançar.</p>
+    <main>
+      {lp.order.map((section) => {
+        const Comp = componentsMap[section];
+        const layout = globals[section];
+        const data = (lp as any)[section];
+        return <Comp key={section} layout={layout} data={data} />;
+      })}
     </main>
-  )
+  );
 }
