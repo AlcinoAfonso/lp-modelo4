@@ -11,12 +11,12 @@
       "textColor": "#333333",
       "logoUrl": "https://quantecportal.com/wp-content/uploads/2025/04/logo-angelo-1-1.svg",
       "menu": [
-        { "name": "etapas", "link": "#etapas" },
-        { "name": "quem somos", "link": "#quem_somos" }
+        { "name": "etapas",       "link": "#etapas"     },
+        { "name": "quem somos",   "link": "#quem_somos" }
       ],
       "phone": {
         "display": "(21) 97965-8483",
-        "link": "21979658483"
+        "link":    "21979658483"
       }
     }
   }
