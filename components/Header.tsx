@@ -1,42 +1,11 @@
 // components/Header.tsx
-
-import React from 'react';
-
-type MenuItem = { name: string; link: string };
-type Phone = { display: string; link: string };
-
-type LayoutHeader = {
-  gridClasses: { mobile: string; md: string };
-  col2: {
-    classes: string;
-    contentOrder: string[];
-    hideOn: { mobile: string[]; md: string[] };
-  };
-};
-
-type DataHeader = {
-  backgroundColor: string;
-  textColor: string;
-  logoUrl: string;
-  menu: MenuItem[];
-  phone: Phone;
-};
-
-interface HeaderProps {
-  layout: LayoutHeader;
-  data: DataHeader;
-}
-
-export default function Header({ layout, data }: HeaderProps) {
+export default function Header({ layout, data }) {
   return (
     <header
-      style={{
-        backgroundColor: data.backgroundColor,
-        color: data.textColor,
-      }}
-      className={`grid ${layout.gridClasses.mobile} ${layout.gridClasses.md} items-center px-4 md:px-8 mb-8`}
+      style={{ backgroundColor: data.backgroundColor, color: data.textColor }}
+      className="grid grid-cols-1 md:grid-cols-2 items-center px-4 md:px-8 mb-8"
     >
-      {/* Coluna 1 – logo */}
+      {/* logo — sempre na esquerda/linha 1 */}
       <div className="flex items-center">
         <img
           src={data.logoUrl}
@@ -45,41 +14,22 @@ export default function Header({ layout, data }: HeaderProps) {
         />
       </div>
 
-      {/* Coluna 2 – menu / telefone / ícone */}
-      <div className={layout.col2.classes}>
-        {layout.col2.contentOrder.map((item) => {
-          switch (item) {
-            case 'nav':
-              return (
-                <nav key="nav" className="flex space-x-4">
-                  {data.menu.map((m) => (
-                    <a key={m.link} href={m.link}>
-                      {m.name}
-                    </a>
-                  ))}
-                </nav>
-              );
-            case 'phone':
-              return (
-                <a key="phone" href={`tel:${data.phone.link}`} className="ml-4">
-                  {data.phone.display}
-                </a>
-              );
-            case 'hamburgerIcon':
-              return (
-                <button
-                  key="hamburger"
-                  className="md:hidden ml-4 text-2xl leading-none"
-                  aria-label="Abrir menu"
-                >
-                  ☰
-                </button>
-              );
-            default:
-              return null;
-          }
-        })}
+      {/* ações — menu + telefone; escondidos em mobile */}
+      <div className="hidden md:flex items-center justify-end space-x-6">
+        <nav className="flex space-x-4">
+          {data.menu.map((m) => (
+            <a key={m.link} href={m.link}>
+              {m.name}
+            </a>
+          ))}
+        </nav>
+        <a href={`tel:${data.phone.link}`}>{data.phone.display}</a>
       </div>
+
+      {/* hambúrguer — só mobile */}
+      <button className="md:hidden justify-self-end text-2xl" aria-label="Menu">
+        ☰
+      </button>
     </header>
   );
 }
